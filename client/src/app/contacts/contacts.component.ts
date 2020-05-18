@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./contacts.component.css'],
 })
 export class ContactsComponent implements OnInit {
-  contacts: Contact[] = [];
+  contacts: Contact[];
   contact: Contact;
 
   private contactsUpdated = new Subject<Contact[]>();
@@ -17,8 +17,9 @@ export class ContactsComponent implements OnInit {
   ngOnInit() {
     this.contactService
       .getContacts()
-      .subscribe((contacts: any) => {
-        this.contacts = contacts;
+      .subscribe((contactsInfo: any) => {
+        this.contacts = contactsInfo.contacts;
+
         this.contactsUpdated.next([...this.contacts]);
       });
   }
